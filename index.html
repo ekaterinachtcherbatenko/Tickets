@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  </head>
+  <body>
+    <h1></h1>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="js/app.js"></script>
+
+
+    <title>Document</title>
+</head>
+
+<!-- tickets-->
+
+
+<!--cards-->
+    <div class="card-group">
+  <div class="card">
+    
+    <div class="card-body">
+      <h5 class="card-title">Estudiante</h5>
+      <p class="card-text">
+        <h5>Tiene un decuento</h5>
+        <h2>80%</h2>
+        <h6>*presentar documentacion</h6></p>
+    </div>
+   
+  </div>
+  <div class="card">
+    
+    <div class="card-body">
+      <h5 class="card-title">Trainee</h5>
+      <p class="card-text"><h5>Tiene un decuento</h5>
+        <h2>50%</h2>
+        <h6>*presentar documentacion</h6></p>
+    </div>
+   
+  </div>
+  <div class="card">
+    
+    <div class="card-body">
+      <h5 class="card-title">Junior</h5>
+      <p class="card-text"><h5>Tiene un decuento</h5>
+        <h2>15%</h2>
+        <h6>*presentar documentacion</h6></p>
+    </div>
+    
+    
+  </div>
+</div>
+ <div class="tickets-text">
+  <h5>VENTA</h5>
+  <h1>valor de ticket $200</h1>
+ </div>
+<!--nombre apellido correo-->
+
+
+<!--categoria -->
+<select class="form-select" aria-label="Default select example">
+  <option selected>Categoria</option>
+  <option value="1">Estudiante</option>
+  <option value="2">Trainee</option>
+  <option value="3">Junior</option>
+</select>
+
+
+
+<form class="ticketsForm" action="">
+<div class="tickets-form">
+<input type="text" class="ticketsFirstName" name="Nombre" placeholder="Nombre">
+<input type="text" class="ticketsLastName" name="Apellido" placeholder="Apellido">
+<input type="email" class="ticketsEmail" name="Email" placeholder="Email">
+<div class="labelTicketsQuantity">
+<label for="Cantidad">Cantidad</label>
+<input id="ticketsQuantity" type="number" class="ticketsQuantity"
+name="Cantidad"
+placeholder="Cantidad" min="1" max="4" required>
+
+</div>
+<div class="labelTicketsCategory">
+  <label for="Categoria">Categoria</label>
+  <select name="Categoria" class="labelTicketsCategory">
+    <option value="Estudiante">Estudiante</option>
+    <option value="Trainee">Trainee</option>
+    <option value="Junior">Junior</option>
+  </select>
+</div>
+<label for="">Total a pagar: </label>
+<input type="text" id="resultado">
+<div class="m-3 py-1 text-start bg-light-subtle border border-success rounded-3">
+<output class="ticketsOutput"><span class="ticketsValue">Total a pagar:</span> </output>
+</div>
+
+<p>
+
+</p>
+<div class="mb-3">
+  <label for="exampleFormControlOutput" class="form-label">Total a pagar</label>
+  <output type="ticketsOutput" class="ticketsValue" id="exampleFormControlOutput" placeholder="">
+</div>
+<button id="ticketsBorrar" type="reset" class="btnTickets" name="Borrar">Borrar</button>
+<button id="ticketsResumen"  class="btnTickets" name="Resumen">Resumen</button>
+</div>
+</form>
+
+<script>
+//variables
+let ticketsResumen=document.querySelector("#ticketsResumen");
+ticketsResumen.addEventListener("click", ticketsPrice);
+
+let ticketsBorrar=document.querySelector("#ticketsBorrar");
+ticketsBorrar.addEventListener("click", borrarOutput);
+
+let ticketsQuantity=document.querySelector(".ticketsQuantity");
+ticketsResumen.addEventListener("click", clearInput);
+
+let ticketsCategory=document.querySelector(".ticketsCategory");
+ticketsCategory.addEventListener("click", descuento);
+
+
+let discountStudent=document.querySelector(".estudiante");
+discountStudent.addEventListener("click", updateCategory);
+
+let discountTrainee=document.querySelector(".trainee");
+discountTrainee.addEventListener("click", updateCategory);
+
+let discountJunior=document.querySelector(".junior");
+discountJunior.addEventListener("click", updateCategory);
+
+//funcion ticketsPrice
+
+function ticketsPrice(evento) {
+    console.log(evento)
+    
+    evento.preventDefault();
+
+    let ticketsQuantity=document.querySelector(".ticketsQuantity");
+     
+    if (Number(ticketsQuantity.value)){
+        let ticketsCategory=document.querySelector(".ticketsCategory");
+        let totalPayment;
+        switch (ticketsCategory.value) {
+            case "Estudiante":{
+            totalPayment=200*0.2*ticketsQuantity.value;
+            break;
+            }
+
+            case "Trainee":{
+            totalPayment=200*0.5*ticketsQuantity.value;
+            break;
+            }
+
+            case "Junior":{
+            totalPayment=200*0.85*ticketsQuantity.value;
+            break;
+            }    
+             
+        }
+        document.querySelector(".ticketsOutput").textContent='Total a pagar: $ $ {totalPayment}';
+        let outputNode=document.querySelector(".ticketsOutput");
+        let textNode=document.createTextNode("Comprar");
+        spanNode.append(textNode);
+        outputNode.append(spanNode);
+        
+        let ticketsBuy=document.querySelector(".ticketsBuy");
+        ticketsBuy.addEventListener("click", ticketsSubmit);
+        
+    }
+
+else{
+  document.querySelector(".ticketsQuantity").computedStyleMap.border="2px solid red";
+  ticketsQuantity.value="";
+  ticketsQuantity.placeholder="Ingrese una cantidad valida";
+}
+
+}
+
+ 
+</script>
+
+  </body>
+
+
+
+</html>
